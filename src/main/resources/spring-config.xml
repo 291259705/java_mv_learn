@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+    <!-- 组件扫描，扫描含有注解的类 -->
+    <context:component-scan base-package="com.mv"></context:component-scan>
+    <!-- 启用自动代理 -->
+    <aop:aspectj-autoproxy />
+
+    <!-- 创建bookService实例 -->
+    <bean id="bookServiceId" class="com.mv.service.BookServiceImpl">
+        <property name="bookDao" ref="bookDaoId"/>
+    </bean>
+    <!-- 创建bookDao实例 -->
+    <bean id="bookDaoId" class="com.mv.dao.BookDaoImpl" />
+
+    <!-- 构造函数 -->
+    <bean id="userId" class="com.mv.entity.User">
+        <constructor-arg index="0" type="java.lang.Integer" value="1" />
+        <constructor-arg index="1" type="java.lang.String" value="小张" />
+
+        <property name="users">
+            <list>
+                <ref bean="user2" />
+                <ref bean="user2" />
+            </list>
+        </property>
+    </bean>
+    <bean id="user2" class="com.mv.entity.User">
+        <constructor-arg index="0" name="name" value="老王" />
+        <constructor-arg index="1" name="age" value="25" />
+    </bean>
+
+
+    <!-- 半自动：让spring创建代理对象，从spring 容器中手动的获取代理对象 -->
+    <!--
+    <bean id="proxyServerId" class="org.springframework.aop.framework.ProxyFactoryBean">
+        <property name="interfaces" value="com.mv.service.UserService" />
+        <property name="target" ref="userServiceId" />
+        <property name="interceptorNames" value="myAspectId"/>
+    </bean>
+    -->
+
+    <bean id="userServiceId" class="com.mv.service.UserServiceImpl"></bean>
+    <!-- AOP 全自动 -->
+    <!--
+        <bean id="xmlLog" class="com.mv.entity.XmlAopDemoUserLog" />
+
+        <aop:config>
+            <aop:aspect ref="xmlLog">
+                <aop:pointcut id="logpoint" expression="execution(* com.mv.service.UserServiceImpl.*(..))" />
+
+                <aop:after method="afterLog" pointcut-ref="logpoint"/>
+                <aop:before method="beforeLog" pointcut-ref="logpoint" />
+                <aop:after-returning method="afterReturningLog" pointcut-ref="logpoint"/>
+                <aop:after-throwing method="afterThrowingLog" pointcut-ref="logpoint" />
+                <aop:around method="aroundLog" pointcut-ref="logpoint" />
+            </aop:aspect>
+        </aop:config>
+        -->
+
+    <aop:config proxy-target-class="true">
+        <aop:pointcut id="pointcut" expression="execution(* com.mv.service.UserServiceImpl.*(..))" />
+        <aop:advisor advice-ref="myAspectId" pointcut-ref="pointcut" />
+    </aop:config>
+
+</beans>

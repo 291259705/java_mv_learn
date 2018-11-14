@@ -1,0 +1,36 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+    <class name="POJO.AgingEntity" table="aging">
+        <id name="id" column="id"/>
+        <property name="agingType" column="aging_type"/>
+        <property name="deliveryCustomerName" column="delivery_customer_name"/>
+        <property name="deliveryCustomerId" column="delivery_customer_id"/>
+        <property name="targetStorehouse" column="target_storehouse"/>
+        <property name="arrivalTime" column="arrival_time"/>
+        <property name="brand" column="brand"/>
+        <property name="transportMode" column="transport_mode"/>
+        <property name="poNumber" column="po_number"/>
+        <property name="operateStatus" column="operate_status"/>
+        <property name="operatorId" column="operator_id"/>
+        <property name="operatorName" column="operator_name"/>
+        <property name="operateTime" column="operate_time"/>
+        <property name="operatorDeptId" column="operator_dept_id"/>
+        <property name="operatorDeptName" column="operator_dept_name"/>
+        <property name="recorderId" column="recorder_id"/>
+        <property name="recorderName" column="recorder_name"/>
+        <property name="recorderDeptId" column="recorder_dept_id"/>
+        <property name="recorderDeptName" column="recorder_dept_name"/>
+        <property name="recordTime" column="record_time"/>
+        <property name="remark" column="remark"/>
+        <property name="traceId" column="trace_id"/>
+        <property name="enabledFlag" column="enabled_flag"/>
+        <property name="createdBy" column="created_by"/>
+        <property name="creationDate" column="creation_date"/>
+        <property name="updatedBy" column="updated_by"/>
+        <property name="updationDate" column="updation_date"/>
+    </class>
+</hibernate-mapping>

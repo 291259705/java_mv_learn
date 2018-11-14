@@ -1,0 +1,10 @@
+<component name="libraryTable">
+  <library name="cuslibs">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/../../jdk/cuslibs/sqljdbc4-2.0.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../../jdk/cuslibs/mysql-connector-java-5.1.47.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
